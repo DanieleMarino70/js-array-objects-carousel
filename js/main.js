@@ -94,9 +94,11 @@ let index = 0;
     imgText.innerHTML = image.text;
     
     divSliderEl.classList.add("cover");
-    if(index == activeImage){
+    imgMain.classList.add("main-img");
+    if(index == 0){
       divSliderEl.classList.add("border");
       imgMain.classList.add("active");
+      divTextEl.classList.add("active");
     }
   
     if(index > 0){
@@ -116,8 +118,19 @@ let index = 0;
   }
   
   nextEl.addEventListener("click", function(){
-    const coverSlides = document.querySelectorAll(".cover");
     
+    const coverSlides = document.querySelectorAll(".cover");
+    const imgSlides = document.querySelectorAll(".main-img");
+    const textSlides = document.querySelectorAll("#main-image-text div");
+    
+
+    imgSlides[activeImage].classList.remove("active");
+    imgSlides[activeImage].classList.add("hide");
+
+    textSlides[activeImage].classList.remove("active");
+    textSlides[activeImage].classList.add("hide");
+
+
     coverSlides[activeImage].classList.add("item");
     coverSlides[activeImage].classList.remove("border");
 
@@ -126,6 +139,12 @@ let index = 0;
     if(activeImage >= coverSlides.length){
       activeImage = 0;
     }
+    imgSlides[activeImage].classList.add("active");
+    imgSlides[activeImage].classList.remove("hide");
+
+    textSlides[activeImage].classList.add("active");
+    textSlides[activeImage].classList.remove("hide");
+
     coverSlides[activeImage].classList.add("border");
     coverSlides[activeImage].classList.remove("item");
     
@@ -136,6 +155,14 @@ let index = 0;
 
 previousEl.addEventListener("click", function () {
   const coverSlides = document.querySelectorAll(".cover");
+  const imgSlides = document.querySelectorAll(".main-img");
+  const textSlides = document.querySelectorAll("#main-image-text div");
+
+  imgSlides[activeImage].classList.remove("active");
+  imgSlides[activeImage].classList.add("hide");
+
+  textSlides[activeImage].classList.remove("active");
+  textSlides[activeImage].classList.add("hide");
 
   coverSlides[activeImage].classList.add("item");
   coverSlides[activeImage].classList.remove("border");
@@ -145,13 +172,15 @@ previousEl.addEventListener("click", function () {
   if (activeImage < 0) {
     activeImage = coverSlides.length - 1;
   }
+
+  imgSlides[activeImage].classList.add("active");
+  imgSlides[activeImage].classList.remove("hide");
+
+  textSlides[activeImage].classList.add("active");
+  textSlides[activeImage].classList.remove("hide");
+
   coverSlides[activeImage].classList.add("border");
   coverSlides[activeImage].classList.remove("item");
     
 });
-
-// Milestone 2:
-// Aggiungere il **ciclo infinito** del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso sopra, 
-// la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso sotto.
-
 
