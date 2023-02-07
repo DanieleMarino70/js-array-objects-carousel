@@ -70,12 +70,12 @@ const mainContainerEl = document.getElementById("main-image");
 const mainImageTextEl = document.getElementById("main-image-text");
 const sliderEl = document.getElementById("slider-container");
 
-carouselCreation();
 
-function carouselCreation(){
 
-  let index = 0;
-  let counter = 0;
+const previousEl = document.getElementById("previous-carousel");
+const nextEl = document.getElementById("next-carousel");
+let activeImage = 0;
+let index = 0;
 
   for (const image of images){
     const imgMain = document.createElement("img");
@@ -94,8 +94,9 @@ function carouselCreation(){
     imgText.innerHTML = image.text;
     
     divSliderEl.classList.add("cover");
-    if(index == 0){
+    if(index == activeImage){
       divSliderEl.classList.add("border");
+      imgMain.classList.add("active");
     }
   
     if(index > 0){
@@ -105,6 +106,7 @@ function carouselCreation(){
   
     }
 
+
    mainContainerEl.append(imgMain);
    sliderEl.append(divSliderEl);
    divSliderEl.append(imgSlider);
@@ -112,13 +114,44 @@ function carouselCreation(){
    divTextEl.append(imgTitle, imgText);
    index++;
   }
+  
+  nextEl.addEventListener("click", function(){
+    const coverSlides = document.querySelectorAll(".cover");
+    
+    coverSlides[activeImage].classList.add("item");
+    coverSlides[activeImage].classList.remove("border");
+
+    activeImage++;
+    
+    if(activeImage >= coverSlides.length){
+      activeImage = 0;
+    }
+    coverSlides[activeImage].classList.add("border");
+    coverSlides[activeImage].classList.remove("item");
+    
+    
+  });
 
 
-}
 
+previousEl.addEventListener("click", function () {
+  const coverSlides = document.querySelectorAll(".cover");
 
+  coverSlides[activeImage].classList.add("item");
+  coverSlides[activeImage].classList.remove("border");
 
+  activeImage--;
+
+  if (activeImage < 0) {
+    activeImage = coverSlides.length - 1;
+  }
+  coverSlides[activeImage].classList.add("border");
+  coverSlides[activeImage].classList.remove("item");
+    
+});
 
 // Milestone 2:
 // Aggiungere il **ciclo infinito** del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso sopra, 
 // la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso sotto.
+
+
