@@ -70,37 +70,52 @@ const mainContainerEl = document.getElementById("main-image");
 const mainImageTextEl = document.getElementById("main-image-text");
 const sliderEl = document.getElementById("slider-container");
 
-let index = 0;
-let counter = 0;
+carouselCreation();
 
-for (const image of images){
+function carouselCreation(){
+
+  let index = 0;
+  let counter = 0;
+
+  for (const image of images){
+    const imgMain = document.createElement("img");
+    const imgSlider = document.createElement("img");
   
-  const imgMain = document.createElement("img");
-  const imgSlider = document.createElement("img");
+    const divTextEl = document.createElement("div");
+    const divSliderEl = document.createElement("div");
 
-  const divEl = document.createElement("div");
-  const imgTitle = document.createElement("h2");
-  const imgText = document.createElement("p");
+    const imgTitle = document.createElement("h2");
+    const imgText = document.createElement("p");
+  
+    imgMain.src = image.image;
+    imgSlider.src = image.image;
+  
+    imgTitle.innerHTML = image.title;
+    imgText.innerHTML = image.text;
+    
+    divSliderEl.classList.add("cover");
+    if(index == 0){
+      divSliderEl.classList.add("border");
+    }
+  
+    if(index > 0){
+      imgMain.classList.add("hide");
+      divTextEl.classList.add("hide");
+      divSliderEl.classList.add("item");
+  
+    }
 
-  imgMain.src = image.image;
-  imgSlider.src = image.image;
-
-  imgTitle.innerHTML = image.title;
-  imgText.innerHTML = image.text;
-
-  if(index > 0){
-    imgMain.classList.add("hide");
-    imgTitle.classList.add("hide");
-    imgText.classList.add("hide");
-
+   mainContainerEl.append(imgMain);
+   sliderEl.append(divSliderEl);
+   divSliderEl.append(imgSlider);
+   mainImageTextEl.append(divTextEl);
+   divTextEl.append(imgTitle, imgText);
+   index++;
   }
 
- mainContainerEl.append(imgMain);
- sliderEl.append(imgSlider);
- mainImageTextEl.append(divEl);
- divEl.append(imgTitle, imgText);
- index++;
+
 }
+
 
 
 

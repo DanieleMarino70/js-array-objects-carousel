@@ -28,12 +28,16 @@
     position: relative;
 }
 
-.image-slider img{
+.image-slider .cover > img{
     object-fit: cover;
-    width: 100%;
+    height: 100%;
+    width: 100%;   
+}
+
+.cover{
+    position: relative;
+    object-fit: cover;
     height: calc(100% / 5);
-    
-    
 }
 
 
@@ -46,6 +50,7 @@
     height: 2rem;
     border-radius: 50%;
     background-color: lightgray;
+    z-index: 2;
 }
 
 .after-circle{
@@ -57,6 +62,7 @@
     height: 2rem;
     border-radius: 50%;
     background-color: lightgray;
+    z-index: 2;
 }
 
 
@@ -76,3 +82,15 @@
 .active{
     display: block;
 }
+
+
+.item::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background:rgba(0,0,0,0.5);
+}
+
